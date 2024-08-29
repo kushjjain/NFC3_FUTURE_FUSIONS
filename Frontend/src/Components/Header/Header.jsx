@@ -43,7 +43,7 @@ const Header = ({ isAdmin }) => {
       <div className="space-x-4">
         <Link
           to="/register"
-          className="bg-[#f5cda3] text-[#00275b] font-semibold text-lg px-6 py-3 rounded-md hover:bg-[#e4b993] hover:scale-110 hover:text-[#001d4d] transition-transform transition-colors duration-300"
+          className="bg-[#45b962] text-[white] font-semibold text-lg px-6 py-3 rounded-md hover:bg-[#e4b993] hover:scale-110 hover:text-[#001d4d] transition-transform transition-colors duration-300"
         >
           Register
         </Link>
