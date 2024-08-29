@@ -22,7 +22,9 @@ def create_app():
     from package.users.routes import user_bp
     from package.pets.routes import pets_bp
     from package.adoption.routes import adopt_bp
+    from package.shelter.routes import shelter_bp
     app.register_blueprint(pets_bp, url_prefix='/pets')
     app.register_blueprint(user_bp)
     app.register_blueprint(adopt_bp)
+    app.register_blueprint(shelter_bp, url_prefix='/shelter')
     return app
