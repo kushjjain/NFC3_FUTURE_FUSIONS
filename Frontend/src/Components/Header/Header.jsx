@@ -37,6 +37,12 @@ const Header = ({ isAdmin }) => {
           >
             Dashboard
           </Link>
+          <Link
+          to="/contact"
+          className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
+        >
+          Contact Us
+        </Link>
       </nav>
 
       {/* Right side */}

@@ -6,6 +6,7 @@ import Home from './Components/HomePage/Home';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Dashboard from './Components/Dashboard/Dashboard';
+import ContactUs from './Components/Contact/ContactUs'
 import './App.css';
 
 function AppContent() {
@@ -20,6 +21,7 @@ function AppContent() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/contact' element={<ContactUs/>} />
       </Routes>
       {!isAuthPage && <Footer />}
     </>
