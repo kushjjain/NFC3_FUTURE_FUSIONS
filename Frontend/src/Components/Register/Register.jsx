@@ -10,13 +10,8 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [profilePic, setProfilePic] = useState(null);
     const [error, setError] = useState('');
-<<<<<<< HEAD
-
-    const defaultProfilePic = '../../Images/profile_default.png';
-=======
     const navigate = useNavigate(); 
-    const defaultProfilePic = 'path_to_your_default_image.png';
->>>>>>> 9afb119dff6e9f3cc2638436f9cd85022841b882
+    const defaultProfilePic = '../../Images/profile_default.png';
 
     const validatePassword = (password) => {
         const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;

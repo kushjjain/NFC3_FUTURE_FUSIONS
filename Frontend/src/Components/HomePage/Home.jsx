@@ -75,10 +75,10 @@ const Home = () => {
             <section ref={(el) => (sectionsRef.current[0] = el)} className="flex flex-col md:flex-row items-center my-8 gap-4 md:gap-8">
                 <div className="image-area w-full md:w-1/3 mb-4 md:mb-0 flex justify-center bg-black p-4 rounded-lg">
                     <img
-                        src={desc}
+                        src={desc3}
                         alt="Happy pet"
                         className="rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl duration-300 w-3/4 max-w-xs"
-                        style={{ filter: 'none' }}  // Ensure no blur effect
+                        style={{ filter: 'none' }} 
                     />
                 </div>
                 <div className="description-area w-full md:w-2/3 text-left md:pl-6 flex flex-col justify-center">
@@ -136,7 +136,7 @@ const Home = () => {
                         </blockquote>
                     </div>
                     <div className="image-area w-[70%] md:w-1/3 mt-6 md:mt-0 bg-black p-4 rounded-lg flex justify-center">
-                        <img src={desc3} alt="Pet care" className="rounded-lg shadow-2xl w-3/4 md:w-2/3" />
+                        <img src={desc} alt="Pet care" className="rounded-lg shadow-2xl w-3/4 md:w-2/3" />
                     </div>
                 </div>
             </section>

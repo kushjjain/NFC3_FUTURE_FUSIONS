@@ -1,21 +1,35 @@
-import Login from './Components/Login/Login'
-import './App.css'
-import Register from './Components/Register/Register'
-import { BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
-import Home from './Components/HomePage/Home'
-function App() {
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
+import Home from './Components/HomePage/Home';
+import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
+import './App.css';
+
+function AppContent() {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path='/' Component={Home} />
-          <Route path='/login' Component={Login}/>
-          <Route path='/register' Component={Register}/>
-        </Routes>
-      </Router>
+      {!isAuthPage && <Header />}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+      </Routes>
+      {!isAuthPage && <Footer />}
     </>
-  )
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+export default App;
