@@ -77,6 +77,7 @@ class Pet(db.Model):
 
     adopter_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     adoptions = db.relationship('Adoption', backref='pet', lazy=True)
+    shelter_id = db.Column(db.Integer, db.ForeignKey('shelters.id'), nullable=True)
 
 class Adoption(db.Model):    
     id = db.Column(db.Integer, primary_key=True)
@@ -84,3 +85,20 @@ class Adoption(db.Model):
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
     adoption_date = db.Column(db.DateTime, default=datetime.utcnow)
     status = db.Column(db.String(20), nullable=False, default="in_progress")  # 'in progress', 'completed'
+
+
+class Shelter(db.Model):
+    __tablename__ = 'shelters'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    phone_number = db.Column(db.String(15), nullable=False)
+    email = db.Column(db.String(100), nullable=True)
+    website = db.Column(db.String(100), nullable=True)
+    description = db.Column(db.Text, nullable=True)
+
+    # Relationships
+    pets = db.relationship('Pet', backref='shelter', lazy=True)
