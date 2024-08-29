@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import './Login.css';
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('user'); // Default role
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5008/api/auth/login', { username, password });
+            const response = await axios.post(`http://localhost:5008/api/auth/${role}/login`, { username, password });
             navigate('/');
         } catch (err) {
             console.error('Error logging in:', err);
             setError('Invalid Credentials');
         }
     };
-    
 
     return (
         <div className="relative flex justify-center items-center min-h-screen overflow-hidden bg-gray-100">
@@ -28,6 +28,22 @@ const Login = () => {
             <div className="w-8/12 max-w-md bg-white p-8 rounded-lg shadow-lg backdrop-blur-md bg-opacity-60">
                 <h2 className="text-center text-2xl mb-4 font-bold text-gray-800">Login</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Role Dropdown */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1 text-gray-600" htmlFor="role">
+                            Role
+                        </label>
+                        <select
+                            id="role"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                        >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
                     {/* Username Input */}
                     <div>
                         <label className="block text-sm font-medium mb-1 text-gray-600" htmlFor="username">
@@ -78,11 +94,10 @@ const Login = () => {
                     {/* Register Link */}
                     <div className="text-center mt-3 text-[14px]">
                         <span className="text-gray-400">Don't have an account? </span>
-                        <Link to="/register"  className="text-blue-500 hover:underline">
+                        <Link to="/register" className="text-blue-500 hover:underline">
                             Register here
                         </Link>
                     </div>
-
                 </form>
             </div>
         </div>

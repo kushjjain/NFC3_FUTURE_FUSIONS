@@ -8,6 +8,7 @@ const Shelter = () => {
     petType: '',
     breed: '',
     age: '',
+    numberOfPets: '',
     image: null,
   });
 
@@ -17,6 +18,7 @@ const Shelter = () => {
     petType: '',
     breed: '',
     age: '',
+    numberOfPets: '',
     image: '',
   });
 
@@ -52,6 +54,12 @@ const Shelter = () => {
     // Validate age
     if (isNaN(formData.age) || formData.age <= 0) {
       newErrors.age = 'Age must be a positive number';
+      valid = false;
+    }
+
+    // Validate number of pets
+    if (isNaN(formData.numberOfPets) || formData.numberOfPets < 0) {
+      newErrors.numberOfPets = 'Number of pets must be a non-negative number';
       valid = false;
     }
 
@@ -211,6 +219,23 @@ const Shelter = () => {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             />
             {errors.age && <p className="text-red-600 text-sm mt-1">{errors.age}</p>}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="numberOfPets">
+              Number of Pets
+            </label>
+            <input
+              type="number"
+              id="numberOfPets"
+              name="numberOfPets"
+              value={formData.numberOfPets}
+              onChange={handleChange}
+              required
+              min="0"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            />
+            {errors.numberOfPets && <p className="text-red-600 text-sm mt-1">{errors.numberOfPets}</p>}
           </div>
 
           <div className="mb-4">

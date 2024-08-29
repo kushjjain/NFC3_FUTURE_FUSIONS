@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
+    const [role, setRole] = useState('user'); // Default role
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [profilePic, setProfilePic] = useState(null);
+    const [organizationName, setOrganizationName] = useState(''); // For Admin
     const [error, setError] = useState('');
     const navigate = useNavigate(); 
     const defaultProfilePic = '../../Images/profile_default.png';
@@ -17,23 +19,28 @@ const Register = () => {
         const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
         return passwordRegex.test(password);
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!name) {
-            setError("Name cannot be empty");
-            return;
-        }
         if (!username) {
             setError("Username cannot be empty");
             return;
         }
         if (!validatePassword(password)) {
-            setError("Password must be at least 8 characters long, contains at least one special character and one number");
+            setError("Password must be at least 8 characters long, contain at least one special character, and one number");
             return;
         }
         if (password !== confirmPassword) {
             setError("Passwords do not match");
+            return;
+        }
+        if (role === 'user' && !name) {
+            setError("Name cannot be empty");
+            return;
+        }
+        if (role === 'admin' && !organizationName) {
+            setError("Organization name cannot be empty");
             return;
         }
 
@@ -42,8 +49,8 @@ const Register = () => {
             username,
             password,
             gender,
-            fullName: name,
-            profilePic: profilePic || defaultProfilePic // Default or provided URL
+            profilePic: profilePic || defaultProfilePic, // Default or provided URL
+            ...(role === 'user' ? { fullName: name } : { organizationName })
         };
 
         try {
@@ -65,21 +72,61 @@ const Register = () => {
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg backdrop-blur-md bg-opacity-60">
                 <h2 className="text-center text-2xl mb-4 font-bold text-gray-800">Register</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Name Field */}
+                    {/* Role Dropdown */}
                     <div>
-                        <label className="block text-sm font-medium mb-1 text-gray-600" htmlFor="name">
-                            Name
+                        <label className="block text-sm font-medium mb-1 text-gray-600" htmlFor="role">
+                            Role
                         </label>
-                        <input
-                            type="text"
-                            id="name"
+                        <select
+                            id="role"
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                        >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
                     </div>
+
+                    {/* Conditional Fields */}
+                    {role === 'user' && (
+                        <>
+                            {/* Name Field */}
+                            <div>
+                                <label className="block text-sm font-medium mb-1 text-gray-600" htmlFor="name">
+                                    Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Enter your name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </>
+                    )}
+                    {role === 'admin' && (
+                        <>
+                            {/* Organization Name Field */}
+                            <div>
+                                <label className="block text-sm font-medium mb-1 text-gray-600" htmlFor="organizationName">
+                                    Organization Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="organizationName"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Enter your organization name"
+                                    value={organizationName}
+                                    onChange={(e) => setOrganizationName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </>
+                    )}
 
                     {/* Gender Selection */}
                     <div>
@@ -206,7 +253,6 @@ const Register = () => {
                             Login here
                         </Link>
                     </div>
-
                 </form>
             </div>
         </div>

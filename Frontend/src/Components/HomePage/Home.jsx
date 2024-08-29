@@ -6,6 +6,8 @@ import desc from '../../Images/desc.png';
 import desc1 from '../../Images/image1.png';
 import desc2 from '../../Images/image2.png';
 import desc3 from '../../Images/image3.png';
+import { useNavigate } from 'react-router-dom';
+
 // Register ScrollTrigger with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +16,7 @@ const Home = () => {
     const descriptionRef = useRef(null);
     const sectionsRef = useRef([]);
     const buttonsRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Title animation
@@ -142,10 +145,13 @@ const Home = () => {
 
             {/* Buttons at the End */}
             <div ref={buttonsRef} className="btn-group flex justify-center space-x-6 mt-16">
-                <button className="bg-white text-[#00275b] font-semibold px-8 py-4 rounded-md hover:bg-gray-200 transition duration-300 transform hover:scale-110">
+                <button className="bg-white text-[#00275b] font-semibold px-8 py-4 rounded-md hover:bg-gray-200 transition duration-300 transform hover:scale-110"
+                onClick={() => navigate('/adopt-us')}
+                >
                     Adopt a Pet
                 </button>
-                <button className="bg-[#bf3b00] text-white font-semibold px-8 py-4 rounded-md hover:bg-[#a13300] transition duration-300 transform hover:scale-110">
+                <button className="bg-[#bf3b00] text-white font-semibold px-8 py-4 rounded-md hover:bg-[#a13300] transition duration-300 transform hover:scale-110"
+                onClick={() => navigate('/shelter')}>
                     Provide Shelter
                 </button>
             </div>
