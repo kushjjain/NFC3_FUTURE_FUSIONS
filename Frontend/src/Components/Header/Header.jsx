@@ -17,7 +17,7 @@ const Header = ({ isAdmin }) => {
           to="/"
           className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
         >
-          About Us
+          Home
         </Link>
         <Link
           to="/adopt-us"
@@ -31,19 +31,25 @@ const Header = ({ isAdmin }) => {
         >
           Shelter
         </Link>
-        <Link
+        {isAdmin && <Link
             to="/dashboard"
             className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
           >
             Dashboard
-          </Link>
+        </Link>}
+          <Link
+          to="/events"
+          className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
+        >
+          Events
+        </Link>
       </nav>
 
       {/* Right side */}
       <div className="space-x-4">
         <Link
           to="/register"
-          className="bg-[#f5cda3] text-[#00275b] font-semibold text-lg px-6 py-3 rounded-md hover:bg-[#e4b993] hover:scale-110 hover:text-[#001d4d] transition-transform transition-colors duration-300"
+          className="bg-[#45b962] text-[white] font-semibold text-lg px-6 py-3 rounded-md hover:bg-[#e4b993] hover:scale-110 hover:text-[#001d4d] transition-transform transition-colors duration-300"
         >
           Register
         </Link>

@@ -61,7 +61,7 @@ const Home = () => {
     }, []);
 
     return (
-        <main className="bg-[#f5cda3] text-black text-center py-10 px-4">
+        <main className="bg-[#f7dcc0] text-black text-center py-10 px-4">
             {/* Main Title and Description */}
             <h1 ref={titleRef} className="text-5xl font-extrabold mb-6">
                 Taking Care of Your Little Friends
