@@ -1,0 +1,16 @@
+@keyframes moveFootprints {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+.bg-footprints {
+    background-image: url('../../Images/bgImage1.jpg'); /* Replace with your image path */
+    animation: moveFootprints 30s ease infinite;
+    background-size: contain;
+}
+
+
