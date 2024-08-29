@@ -17,7 +17,7 @@ const Header = ({ isAdmin }) => {
           to="/"
           className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
         >
-          About Us
+          Home
         </Link>
         <Link
           to="/adopt-us"
