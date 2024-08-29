@@ -53,3 +53,20 @@ class User(UserMixin, db.Model):
     
 #     # Foreign key to the conversation in which the message was sent
 #     conversation_id = db.Column(db.Integer, db.ForeignKey('conversation._id'), nullable=False)
+
+
+# Pet model
+class Pet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    pet_type = db.Column(db.String(50), nullable=False)
+    breed = db.Column(db.String(50), nullable=False)
+    age_months = db.Column(db.Integer, nullable=False)
+    color = db.Column(db.String(50), nullable=False)
+    size = db.Column(db.String(20), nullable=False)
+    weight_kg = db.Column(db.Float, nullable=False)
+    vaccinated = db.Column(db.Boolean, nullable=False)
+    health_condition = db.Column(db.Boolean, nullable=False)
+    time_in_shelter_days = db.Column(db.Integer, nullable=False)
+    adoption_fee = db.Column(db.Float, nullable=False)
+    previous_owner = db.Column(db.Boolean, nullable=False)
+    adoption_likelihood = db.Column(db.Boolean, nullable=False)
