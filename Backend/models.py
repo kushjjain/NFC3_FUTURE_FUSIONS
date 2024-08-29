@@ -2,7 +2,7 @@ from package import db
 from flask_login import UserMixin
 from package import loginManager
 
-
+from datetime import datetime
 @loginManager.user_loader
 def load_user(id):
     # print("Load user loading", int(id))
@@ -17,6 +17,10 @@ class User(UserMixin, db.Model):
     gender = db.Column(db.String(30), nullable=False)
     profile_pic = db.Column(db.String(30), nullable=True)
     role = db.Column(db.String(20), default="adopter")
+    pets = db.relationship('Pet', backref='adopter', lazy=True)
+
+    adoptions = db.relationship('Adoption', backref='adopter', lazy=True)
+
     # Relationship to messages
     # messages = db.relationship('Message', backref='sender', lazy=True)
     
@@ -70,3 +74,13 @@ class Pet(db.Model):
     adoption_fee = db.Column(db.Float, nullable=False)
     previous_owner = db.Column(db.Boolean, nullable=False)
     adoption_likelihood = db.Column(db.Boolean, nullable=False)
+
+    adopter_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    adoptions = db.relationship('Adoption', backref='pet', lazy=True)
+
+class Adoption(db.Model):    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
+    adoption_date = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(20), nullable=False, default="in_progress")  # 'in progress', 'completed'

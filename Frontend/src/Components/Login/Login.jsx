@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom'
+import axios from 'axios';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -11,12 +12,16 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // API call for authentication
+            const response = await axios.post('http://localhost:5008/api/auth/login', { username, password });
+            // Handle successful login (e.g., save token, redirect, etc.)
+            // Example: navigate('/home'); // Redirect to home page
+            navigate('/');
         } catch (err) {
-            console.log(err);
+            console.error('Error logging in:', err);
             setError('Invalid Credentials');
         }
     };
+    
 
     return (
         <div className="relative flex justify-center items-center min-h-screen overflow-hidden bg-gray-100">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate  } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -10,15 +10,19 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [profilePic, setProfilePic] = useState(null);
     const [error, setError] = useState('');
+<<<<<<< HEAD
 
     const defaultProfilePic = '../../Images/profile_default.png';
+=======
+    const navigate = useNavigate(); 
+    const defaultProfilePic = 'path_to_your_default_image.png';
+>>>>>>> 9afb119dff6e9f3cc2638436f9cd85022841b882
 
     const validatePassword = (password) => {
         const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
         return passwordRegex.test(password);
     };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!name) {
@@ -38,10 +42,28 @@ const Register = () => {
             return;
         }
 
-        const userProfilePic = profilePic ? URL.createObjectURL(profilePic) : defaultProfilePic;
+        // Construct request payload
+        const payload = {
+            username,
+            password,
+            gender,
+            fullName: name,
+            profilePic: profilePic || defaultProfilePic // Default or provided URL
+        };
 
-        setError('');
-        console.log({ name, gender, username, password, profilePic: userProfilePic });
+        try {
+            const response = await axios.post('http://localhost:5008/api/auth/signup', payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            // Handle successful registration
+            console.log('Registration successful:', response.data);
+            navigate('/login'); // Redirect to login page or another page on success
+        } catch (err) {
+            console.error('Error registering:', err);
+            setError('Registration failed');
+        }
     };
 
     return (
