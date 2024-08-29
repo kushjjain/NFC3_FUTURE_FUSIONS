@@ -52,9 +52,8 @@ const Register = () => {
                     'Content-Type': 'application/json',
                 },
             });
-            // Handle successful registration
             console.log('Registration successful:', response.data);
-            navigate('/login'); // Redirect to login page or another page on success
+            navigate('/login'); 
         } catch (err) {
             console.error('Error registering:', err);
             setError('Registration failed');

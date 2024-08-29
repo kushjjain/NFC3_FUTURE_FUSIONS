@@ -36,19 +36,15 @@ const ContactUs = () => {
           ></iframe>
           <div className="contactInfo">
             <h3 className="contactTitle">Company Details</h3>
-<<<<<<< HEAD
+
             <p><FaMapMarkerAlt /> California</p>
             <p><FaPhone /> +1 9876543210</p>
             <p><FaEnvelope /> pawfect@gmail.com</p>
-=======
-            <p><FaMapMarkerAlt /> lorem ipsum</p>
-            <p><FaPhone /> +91 9876543210</p>
-            <p><FaEnvelope /> contact@company.com</p>
->>>>>>> 58efdabb15f517ec7dd0964f075b88ec020dd029
+
           </div>
         </div>
       </section>
-      
+
       <section className="section">
         <h2 className="sectionTitle">Contact Info</h2>
         <form className="form" onSubmit={handleSubmit} ref={formRef}>

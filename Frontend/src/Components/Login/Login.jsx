@@ -13,8 +13,6 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5008/api/auth/login', { username, password });
-            // Handle successful login (e.g., save token, redirect, etc.)
-            // Example: navigate('/home'); // Redirect to home page
             navigate('/');
         } catch (err) {
             console.error('Error logging in:', err);

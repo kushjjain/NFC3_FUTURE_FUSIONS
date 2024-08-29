@@ -36,21 +36,12 @@ const Header = ({ isAdmin }) => {
             className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
           >
             Dashboard
-<<<<<<< HEAD
         </Link>}
           <Link
           to="/events"
           className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
         >
           Events
-=======
-          </Link>
-          <Link
-          to="/contact"
-          className="text-lg hover:text-gray-200 hover:scale-110 hover:bg-[#1b4c93] p-2 rounded-md transition-transform transition-colors duration-300"
-        >
-          Contact Us
->>>>>>> 58efdabb15f517ec7dd0964f075b88ec020dd029
         </Link>
       </nav>
 
