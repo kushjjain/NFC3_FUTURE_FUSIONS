@@ -6,9 +6,9 @@ import './index.css'
 import { AuthProvider } from './Contexts/AuthContext.jsx'
 
 createRoot(document.getElementById('root')).render(
- // <AuthProvider>
   <Router>
+    <AuthProvider>
     <App />
+    </AuthProvider>
   </Router>,
-  //</AuthProvider>
 )

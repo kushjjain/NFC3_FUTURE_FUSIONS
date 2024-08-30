@@ -1,14 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PetProfile.css';
-import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaTimesCircle, FaArrowRight } from 'react-icons/fa';
 
 const PetProfile = ({ pet }) => {
+  const navigate = useNavigate();
+
+  const handleNavigateToQuestionnaire = () => {
+    navigate('/qform');
+  };
+
   return (
     <div className="profileContainer">
       <div className="header">
         <img src={pet.profilePicture} alt="Profile" className="profilePicture" />
-        <h1>{pet.PetType}</h1>
-        <p className="breed">{pet.Breed}</p>
+        <div className="profileDetails">
+          <h1>{pet.PetType}</h1>
+          <p className="breed">{pet.Breed}</p>
+        </div>
       </div>
 
       <div className="infoContainer">
@@ -38,6 +47,10 @@ const PetProfile = ({ pet }) => {
           <p><strong>Previous Owner:</strong> {pet.PreviousOwner ? 'Yes' : 'No'}</p>
         </div>
       </div>
+
+      <button onClick={handleNavigateToQuestionnaire} className="navigateButton">
+        Go to Questionnaire <FaArrowRight className="arrowIcon" />
+      </button>
     </div>
   );
 };

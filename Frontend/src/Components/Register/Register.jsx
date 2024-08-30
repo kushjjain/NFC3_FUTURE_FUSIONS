@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
-    const [role, setRole] = useState('user'); // Default role
+    const [role, setRole] = useState('user'); 
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [profilePic, setProfilePic] = useState(null);
-    const [organizationName, setOrganizationName] = useState(''); // For Admin
+    const [organizationName, setOrganizationName] = useState(''); 
     const [error, setError] = useState('');
     const navigate = useNavigate(); 
     const defaultProfilePic = '../../Images/profile_default.png';

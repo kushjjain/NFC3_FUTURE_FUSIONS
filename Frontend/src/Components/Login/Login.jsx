@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../../Contexts/AuthContext'; 
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('user'); // Default role
+    const [role, setRole] = useState('user'); 
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post(`http://localhost:5008/api/auth/${role}/login`, { username, password });
+            
+            // Use the login function from AuthContext to update the state
+            login({ username, role, token: response.data.token });
+
+            // Redirect to homepage
             navigate('/');
         } catch (err) {
             console.error('Error logging in:', err);

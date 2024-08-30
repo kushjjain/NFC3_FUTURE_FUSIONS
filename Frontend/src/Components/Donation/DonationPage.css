@@ -1,0 +1,111 @@
+.donationContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+  }
+  
+  .donationHeader {
+    margin-bottom: 30px;
+  }
+  
+  .Icon {
+    font-size: 50px;
+    color: #f44336;
+  }
+  
+  .donationTitle {
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .donationSubtitle {
+    font-size: 16px;
+    color: #777;
+    margin-top: 10px;
+  }
+  
+  .donationForm {
+    margin-top: 30px;
+  }
+  
+  .formTitle {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  
+  .donationInput {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .paymentMethods {
+    margin-bottom: 30px;
+  }
+  
+  .paymentTitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+  
+  .paymentOptions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .paymentOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .paymentOption.selected {
+    background: #f44336;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 20px;
+  }
+  
+  .paymentIcon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .donateButton {
+    width: 100%;
+    padding: 15px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .donateButton:hover {
+    background: #e53935;
+  }
+  
+  .thankYouMessage {
+    margin-top: 40px;
+    font-size: 16px;
+    color: #555;
+  }
+  

@@ -1,57 +1,68 @@
-/* Layout and basic styling */
 .profileContainer {
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 800px; /* Maximum width for the profile container */
+    margin: 20px auto; /* Centered horizontally */
     padding: 20px;
     background-color: #fff;
     color: #333;
-    height: 100vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Allow the container to grow and fit within available space */
+    overflow: auto; /* Enable scrolling if content overflows */
+    min-height: calc(100vh - 120px); /* Ensure it takes up enough space minus header and footer */
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* Add margin to ensure content does not overlap */
 }
 
 .profilePicture {
-    width: 500px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 5%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    width: 100%; /* Ensure the image takes full width of its container */
+    max-width: 400px; /* Maximum width of the image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
-    font-size: 3.5rem; /* Increased font size for PetType */
+.profileDetails {
+    display: block;
+    text-align: center; /* Center align the text */
+    margin-bottom: 20px; /* Space below the profile details */
+}
+
+.profileDetails h1 {
+    display: block;
+    font-size: 2rem; /* Adjusted for better fit */
     color: grey;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .breed {
+    display: block;
     font-size: 1.2rem;
     color: #555;
 }
 
 .infoContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column; /* Stack sections vertically */
+    gap: 20px; /* Space between sections */
     width: 100%;
 }
 
 .infoSection {
-    width: 45%;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #007bff;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-bottom: 2px solid #007bff;
     padding-bottom: 10px;
 }
@@ -84,15 +95,25 @@ strong {
     background-color: #0056b3;
 }
 
-/* Full screen styling */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+.navigateButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.profileContainer {
-    height: calc(100vh - 40px);
+.navigateButton:hover {
+    background-color: #0056b3;
+}
+
+.arrowIcon {
+    margin-left: 8px;
 }
