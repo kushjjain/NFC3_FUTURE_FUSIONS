@@ -50,7 +50,7 @@ Pip install -r requirements.txt
 1.run the server
 
 ```bash
-cd core
+cd Backend
 python manage.py runserver
 ```
 
@@ -58,7 +58,7 @@ python manage.py runserver
 
 
 ```bash
-cd frontend
+cd Frontend
 npm install
 ```
 
