@@ -12,11 +12,11 @@ const Footer = () => {
         <Link to="/" className="hover:text-gray-300 transition-colors duration-300">
           Privacy Policy
         </Link>
-        <Link to="/" className="hover:text-gray-300 transition-colors duration-300">
-          Terms of Service
-        </Link>
         <Link to="/contact" className="hover:text-gray-300 transition-colors duration-300">
           Contact Us
+        </Link>
+        <Link to="/donate" className="hover:text-gray-300 transition-colors duration-300">
+          Donate for Pets
         </Link>
       </div>
     </footer>
