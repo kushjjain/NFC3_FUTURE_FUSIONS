@@ -10,16 +10,23 @@ const Login = ({ setIsLoggedIn }) => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+  
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post(`http://localhost:5008/api/auth/${role}/login`, { username, password });
-            localStorage.setItem('authToken', response.data.token);
+
+        // Simulate successful login with any credentials
+        if (username && password) { // Check if fields are not empty
+            // Set user as logged in
             setIsLoggedIn(true);
+
+            // Show an alert message
+            alert('User logged in successfully');
+
+            // Redirect to homepage
             navigate('/');
-        } catch (err) {
-            console.error('Error logging in:', err);
-            setError('Invalid Credentials');
+        } else {
+            // Show error message if fields are empty
+            setError('Please enter both username and password');
         }
     };
 

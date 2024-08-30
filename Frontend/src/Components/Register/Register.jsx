@@ -45,26 +45,27 @@ const Register = () => {
         }
 
         // Construct request payload
-        const payload = {
-            username,
-            password,
-            gender,
-            profilePic: profilePic || defaultProfilePic, // Default or provided URL
-            ...(role === 'user' ? { fullName: name } : { organizationName })
-        };
+        // const payload = {
+        //     username,
+        //     password,
+        //     gender,
+        //     profilePic: profilePic || defaultProfilePic, // Default or provided URL
+        //     ...(role === 'user' ? { fullName: name } : { organizationName })
+        // };
 
-        try {
-            const response = await axios.post('http://localhost:5008/api/auth/signup', payload, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            console.log('Registration successful:', response.data);
-            navigate('/login'); 
-        } catch (err) {
-            console.error('Error registering:', err);
-            setError('Registration failed');
-        }
+        // try {
+        //     const response = await axios.post('http://localhost:5008/api/auth/signup', payload, {
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //     });
+        //     console.log('Registration successful:', response.data);
+        //     navigate('/login'); 
+        // } catch (err) {
+        //     console.error('Error registering:', err);
+        //     setError('Registration failed');
+        // }
+        navigate('/login')
     };
 
     return (

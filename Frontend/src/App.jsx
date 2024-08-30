@@ -16,6 +16,7 @@ import ScheduledAppointments from './Components/Appointments/ScheduledAppointmen
 import AppointmentDetail from './Components/Appointments/AppointmentDetail';
 import DonationPage from './Components/Donation/DonationPage';
 import Questionnaire from './Components/Questionaire/Questionnaire';
+import HomePage from './Components/PetProfile/HomePage';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path='/shelter' element={<Shelter />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/contact' element={<ContactUs />} />
+        <Route path='/adopt-us' element={<HomePage/> } />
         <Route path='/welcome' element={<Welcome />} />
         <Route path='/events' element={<Event />} />
         <Route path='/petprofile' element={<PetProfile pet={pet}/>} />

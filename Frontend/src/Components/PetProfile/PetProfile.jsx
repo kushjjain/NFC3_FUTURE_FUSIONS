@@ -4,6 +4,7 @@ import './PetProfile.css';
 import { FaCheckCircle, FaTimesCircle, FaArrowRight } from 'react-icons/fa';
 
 const PetProfile = ({ pet }) => {
+  
   const navigate = useNavigate();
 
   const handleNavigateToQuestionnaire = () => {
