@@ -39,7 +39,7 @@ def search():
 @pets_bp.route('/all-pets', methods=['GET'])
 def list_pets():
     pets = Pet.query.all()
-    pets_list = [{'id': pet.id, 'type': pet.pet_type, 'breed': pet.breed, 'age': pet.age_months} for pet in pets]
+    pets_list = [{'id': pet.id, 'type': pet.pet_type, 'breed': pet.breed, 'age': pet.age_months, 'imageUrl': pet.image_url, "color": pet.color} for pet in pets]
     return jsonify(pets_list)
 
 

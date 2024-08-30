@@ -1,6 +1,7 @@
-from flask import request,jsonify
+from flask import request,jsonify, Blueprint
 from models import db,Pet,Shelter
-from .import shelter_bp
+
+shelter_bp = Blueprint("shelter", __name__)
 
 
 @shelter_bp.route('/pets', methods=['GET'])
@@ -28,6 +29,7 @@ def get_all_pets():
 @shelter_bp.route('/pets/add', methods=['POST'])
 def add_pet():
     data=request.json
+    print(data)
     new_pet=Pet(
         pet_type=data['pet_type'],
         breed=data['breed'],
@@ -35,12 +37,15 @@ def add_pet():
         color=data['color'],
         size=data['size'],
         weight_kg=data['weight_kg'],
-        vaccinated=data['vaccinated'],
+        vaccinationCertificate=data['vaccinationCertificate'],
         health_condition=data['health_condition'],
         time_in_shelter_days=data['time_in_shelter_days'],
         adoption_fee=data['adoption_fee'],
-        previous_owner=data['previous_owner'],
-        adoption_likelihood=data['adoption_likelihood']
+        previous_owner= True,
+        vaccinated=True,
+        previous_owner_name=data['previous_owner_name'],
+        adoption_likelihood=data['adoption_likelihood'],
+        image_url = data["profilePicture"]
     )
 
     db.session.add(new_pet)
