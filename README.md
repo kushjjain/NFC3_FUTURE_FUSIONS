@@ -76,5 +76,5 @@ Contributions are always welcome!😊
 
 ## Acknowledgements
 
-- This project was inspired by the need for efficient hotel management systems in the hospitality industry.
+- The need for efficient adoption management systems in the hospitality industry inspired this project.
 - Special acknowledgment to the developers of the libraries and frameworks used in this project.
