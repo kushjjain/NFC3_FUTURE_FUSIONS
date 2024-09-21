@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 // Register ScrollTrigger with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
-const Home = () => {
+const Home = ({ isAdmin }) => {
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
     const sectionsRef = useRef([]);
@@ -80,7 +80,7 @@ const Home = () => {
                         src={desc3}
                         alt="Happy pet"
                         className="rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl duration-300 w-3/4 max-w-xs"
-                        style={{ filter: 'none' }} 
+                        style={{ filter: 'none' }}
                     />
                 </div>
                 <div className="description-area w-full md:w-2/3 text-left md:pl-6 flex flex-col justify-center">
@@ -145,15 +145,20 @@ const Home = () => {
 
             {/* Buttons at the End */}
             <div ref={buttonsRef} className="btn-group flex justify-center space-x-6 mt-16">
-                <button className="bg-white text-[#00275b] font-semibold px-8 py-4 rounded-md hover:bg-gray-200 transition duration-300 transform hover:scale-110"
-                onClick={() => navigate('/adopt-us')}
+                <button className="bg-[#bf3b00] text-white font-semibold px-8 py-4 rounded-md hover:bg-[#a13300] transition duration-300 transform hover:scale-110"
+                    onClick={() => navigate('/adopt-us')}
                 >
                     Adopt a Pet
                 </button>
-                <button className="bg-[#bf3b00] text-white font-semibold px-8 py-4 rounded-md hover:bg-[#a13300] transition duration-300 transform hover:scale-110"
-                onClick={() => navigate('/shelter')}>
-                    Provide Shelter
-                </button>
+                {
+                    isAdmin ?
+                        <button className="bg-[#bf3b00] text-white font-semibold px-8 py-4 rounded-md hover:bg-[#a13300] transition duration-300 transform hover:scale-110"
+                            onClick={() => navigate('/shelter')}>
+                            Provide Shelter
+                        </button>
+                        : ""
+                }
+
             </div>
         </main>
     );

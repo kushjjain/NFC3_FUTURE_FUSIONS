@@ -72,7 +72,7 @@ def check_session():
         user = User.query.get(user_id)
         if user:
             return jsonify({"message": "Session valid", "isAdmin": user.role == "admin"}), 200
-    return jsonify({"error": "Session invalid"}), 401
+    return jsonify({"message": "No user logged in"}), 203
 
 @user_bp.route("/api/auth/logout", methods=["POST"])
 def logout():

@@ -4,7 +4,7 @@ import PetCard from "./PetCards";  // Assume this is the card component
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const HomePage = ({isAdmin}) => {
+const HomePage = ({isAdmin, isLoggedIn}) => {
   const [pets, setPets] = useState([]);
   const [loading, setloading] = useState(false)
 const navigate = useNavigate()
@@ -22,7 +22,13 @@ const navigate = useNavigate()
     }
   };
   const handleCardClick = (id) => {
-    // console.log("Card clicked")
+    console.log(isLoggedIn)
+    if(!isLoggedIn)
+    {
+      navigate("/login")
+return
+    }
+
     window.scrollTo({ top: 0});
     navigate(`/adopt-us/${id}`)
   };

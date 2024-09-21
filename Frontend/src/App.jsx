@@ -33,6 +33,9 @@ function App() {
     const checkSession = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:5008/api/auth/check-session', { withCredentials: true });
+        if(response.status=203){
+          console.log("No logged in user")
+        }
         if (response.status === 200) {
           setIsLoggedIn(true);
           if (response.data.isAdmin) {
@@ -40,7 +43,7 @@ function App() {
           }
         }
       } catch (error) {
-        console.error('Session not valid', error);
+        console.log(error);
       }
     };
     checkSession();
@@ -51,7 +54,7 @@ function App() {
       <div  className=' min-h-screen'>
         {!isAuthPage && <Header isLoggedIn={isLoggedIn} isAdmin={isAdmin} setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} />}
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home isAdmin={isAdmin}/>} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/shelter/add-pet/:shelterId' element={<Shelter isAdmin={isAdmin} />} />
@@ -60,8 +63,8 @@ function App() {
           <Route path="/add-shelter" element={<ShelterForm />} />
           <Route path='/dashboard' element={<Dashboard isAdmin={isAdmin} />} />
           <Route path='/contact' element={<ContactUs />} />
-          <Route path='/adopt-us' element={<HomePage isAdmin={isAdmin} />} />
-          <Route path='/adopt-us/:id' element={<PetProfile />} />
+          <Route path='/adopt-us' element={<HomePage isAdmin={isAdmin} isLoggedIn={isLoggedIn}/>} />
+          <Route path='/adopt-us/:id' element={<PetProfile/>} />
           <Route path='/welcome' element={<Welcome />} />
           <Route path='/events' element={<Event isAdmin={isAdmin}/>} />
           <Route path="/events/create" element={<CreateEvent />} />
