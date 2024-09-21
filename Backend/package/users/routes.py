@@ -1,7 +1,7 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from models import User, Pet
 from package import db, bcrypt
-from flask_login import current_user, login_user, logout_user, login_required
+# from flask_login import current_user, login_user, logout_user, login_required
 user_bp = Blueprint('users', __name__)
 @user_bp.route("/", methods=["GET"])
 def home():
@@ -34,13 +34,16 @@ def login():
     print(data)
     username = data.get("username")
     password = data.get("password")
-    user = User.query.filter_by(username=username, role="user").first()
+    user = User.query.filter_by(username=username, role="adopter").first()
+    # print(user)
     if user is None:
+        # print("hi")
         return jsonify({"error": "No such user exists"}), 401
     if bcrypt.check_password_hash(user.password,password):
         print(user.id)
-        login_user(user)
-        print(current_user.username)
+        # login_user(user)
+        session["user_id"] = user.id
+        print(session["user_id"])
         return jsonify({"message": "Login Successful"}), 200
     return jsonify({"error": "Invalid Credentials"}), 401
 
@@ -55,16 +58,35 @@ def login_admin():
         return jsonify({"error": "No such user exists"}), 401
     if bcrypt.check_password_hash(user.password,password):
         print(user.id)
-        login_user(user)
-        print(current_user.username)
+        session["user_id"] = user.id
+        print(session["user_id"])
         return jsonify({"message": "Login Successful"}), 200
     return jsonify({"error": "Invalid Credentials"}), 401
 
+@user_bp.route("/api/auth/check-session", methods=["GET"])
+def check_session():
+    user_id = session.get("user_id")
+    print(user_id)
+
+    if user_id:
+        user = User.query.get(user_id)
+        if user:
+            return jsonify({"message": "Session valid", "isAdmin": user.role == "admin"}), 200
+    return jsonify({"error": "Session invalid"}), 401
+
 @user_bp.route("/api/auth/logout", methods=["POST"])
 def logout():
-    logout_user()
+    session.pop("user_id",None)
     return jsonify({"message": "ok"}), 200
 
+@user_bp.route("/api/auth/get-user", methods=["GET"])
+def get_user():
+    u_id = session.get("user_id")
+    user = User.query.get(u_id)
+    if user:
+        return jsonify({"full_name": user.full_name, "username": user.username, "gender": user.gender, "profile_pic": user.profile_pic, "role":user.role}), 200
+    else: 
+        return jsonify({"error": "Login first"}), 401
 @user_bp.route("/api/admin/register-admin", methods=["POST"])
 def sign_up_admin():
     try:
@@ -86,12 +108,14 @@ def sign_up_admin():
         return jsonify({"error", "Something went wrong"}), 500
 
 @user_bp.route("/api/admin/distribution-data", methods=["GET"])
-@login_required
+# @login_required
 def get_admin_distribution_data():
-    if current_user.role=="adopter":
+    u_id = session["user_id"]
+    user = User.query.get(u_id)
+    if user.role=="adopter":
         return jsonify({"error": "Not an admin user"})
-    pets_1 = Pet.query.filter_by(adoption_likelihood=1).all()
-    pets_0 = Pet.query.filter_by(adoption_likelihood=0).all()
+    pets_1 = Pet.query.filter(Pet.adoption_likelihood>0.5).all()
+    pets_0 = Pet.query.filter(Pet.adoption_likelihood<0.5).all()
     print(len(pets_1))
     return jsonify({
     "labels": ['Likely', 'Unlikely'],
@@ -100,19 +124,22 @@ def get_admin_distribution_data():
 
 
 @user_bp.route("/api/admin/feature_data", methods=["GET"])
-@login_required
+# @login_required
 def get_admin_feature_data():
-    print(current_user)
-    if current_user.role=="adopter":
+    u_id = session.get("user_id")
+    if not u_id:
+        return jsonify({"error": "User not logged in"}), 401
+    user = User.query.get(u_id)
+    if user.role=="adopter":
         return jsonify({"error": "Not an admin user"})
     # Define the attributes you want to filter by
     attributes = {
         'breed': ['Labrador', 'Golden Retriever', 'Persian', 'Siamese', 'Poodle', "Parakeet", "Rabbit"],
         'size': ['Small', 'Medium', 'Large'],
         "pet_type": ["Rabbit", "Dog", "Bird", "Cat"],
-        "color": ['Black', 'White', 'Brown', 'Golden'],
+        "color": ['Black', 'White', 'Brown', 'Orange', "Gray"],
         "vaccinated": [True, False],
-        "health_condition": [True, False],
+        "health_condition": ["Healthy", "Unhealthy"],
         "previous_owner": [True, False]
     }
     
@@ -125,8 +152,9 @@ def get_admin_feature_data():
     # Query for each attribute
     for attribute, values in attributes.items():
         for value in values:
-            count_likely = Pet.query.filter_by(adoption_likelihood=True, **{attribute: value}).count()
-            count_unlikely = Pet.query.filter_by(adoption_likelihood=False, **{attribute: value}).count()
+            count_likely = Pet.query.filter(getattr(Pet, attribute) == value, Pet.adoption_likelihood >= 0.5).count()
+            count_unlikely = Pet.query.filter(getattr(Pet, attribute) == value, Pet.adoption_likelihood < 0.5).count()
+            
             
             result['labels'].append(f'{attribute} {value} Likely')
             result['labels'].append(f'{attribute} {value} Unlikely')

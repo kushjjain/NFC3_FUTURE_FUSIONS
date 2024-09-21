@@ -59,7 +59,7 @@ const Questionnaire = () => {
         icon: 'error',
         confirmButtonText: 'OK',
       }).then(() => {
-        navigate('/petprofile');
+        navigate('/adopt-us');
       });
     }
   };

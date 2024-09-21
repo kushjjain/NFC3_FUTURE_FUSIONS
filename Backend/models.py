@@ -74,13 +74,13 @@ class Pet(db.Model):
     adoption_fee = db.Column(db.Float, nullable=False)
     previous_owner = db.Column(db.Boolean, nullable=False)
     previous_owner_name = db.Column(db.String(40), nullable=False)
-    adoption_likelihood = db.Column(db.Boolean, nullable=False)
+    adoption_likelihood = db.Column(db.Float, nullable=True)
 
-    image_url = db.Column(db.String(100), nullable=True)
+    image_url = db.Column(db.String(500), nullable=True)
     vaccinationCertificate = db.Column(db.String(30), nullable=True)
     adopter_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     adoptions = db.relationship('Adoption', backref='pet', lazy=True)
-    shelter_id = db.Column(db.Integer, db.ForeignKey('shelters.id'), nullable=True)
+    shelter_id = db.Column(db.Integer, db.ForeignKey('shelters.id'), nullable=True, default=1)
 
 class Adoption(db.Model):    
     id = db.Column(db.Integer, primary_key=True)
@@ -105,3 +105,21 @@ class Shelter(db.Model):
 
     # Relationships
     pets = db.relationship('Pet', backref='shelter', lazy=True)
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    datetime = db.Column(db.DateTime, nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(500), nullable=True)
+    def to_dict(self):
+        date_str = self.datetime.strftime('%Y-%m-%d') if self.datetime else None
+        time_str = self.datetime.strftime('%I:%M %p') if self.datetime else None
+        return {
+            'id': self.id,
+            'title': self.name,
+            'date': date_str,
+            'time': time_str,
+            'location': self.address,
+            'description': self.description
+        }

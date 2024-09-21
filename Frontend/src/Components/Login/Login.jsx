@@ -3,33 +3,52 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setIsAdmin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('user'); 
     const [error, setError] = useState('');
     const navigate = useNavigate();
-
-  
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Simulate successful login with any credentials
-        if (username && password) { // Check if fields are not empty
-            // Set user as logged in
-            setIsLoggedIn(true);
-
-            // Show an alert message
-            alert('User logged in successfully');
-
-            // Redirect to homepage
-            navigate('/');
-        } else {
-            // Show error message if fields are empty
+    
+        if (!username || !password) {
             setError('Please enter both username and password');
+            return;
+        }
+    
+        // Determine the correct URL based on the role
+        const url = role === 'admin' 
+            ? 'http://127.0.0.1:5008/api/auth/admin/login' 
+            : 'http://127.0.0.1:5008/api/auth/user/login';
+    
+        try {
+            // console.log(url);
+            // Make the POST request to the backend
+            const response = await axios.post(url, { username, password }, { withCredentials: true });
+            // console.log(response);
+    
+            if (response.data.error) {
+                // Set error message from the response
+                setError(response.data.error);
+            } else {
+                // Set user as logged in
+                setIsLoggedIn(true);
+                if (role=="admin"){
+                    setIsAdmin(true)
+                }
+                // Redirect to homepage
+                navigate('/');
+            }
+        } catch (err) {
+            // Handle errors (network issues, server errors, etc.)
+            // Extract error message from the response, if available
+            const errorMessage = err.response?.data?.error || 'An error occurred. Please try again.';
+            setError(errorMessage);
         }
     };
 
+    
     return (
         <div className="relative flex justify-center items-center min-h-screen overflow-hidden bg-gray-100">
             <div className="absolute inset-0 bg-footprints bg-blur"></div>
@@ -49,7 +68,7 @@ const Login = ({ setIsLoggedIn }) => {
                             onChange={(e) => setRole(e.target.value)}
                         >
                             <option value="user">User</option>
-                            <option value="admin">Admin</option>
+                            <option value="admin">Shelter Admin</option>
                         </select>
                     </div>
 

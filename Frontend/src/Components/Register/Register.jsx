@@ -22,7 +22,8 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
+        // Form validation checks
         if (!username) {
             setError("Username cannot be empty");
             return;
@@ -43,38 +44,51 @@ const Register = () => {
             setError("Organization name cannot be empty");
             return;
         }
-
+    
         // Construct request payload
-        // const payload = {
-        //     username,
-        //     password,
-        //     gender,
-        //     profilePic: profilePic || defaultProfilePic, // Default or provided URL
-        //     ...(role === 'user' ? { fullName: name } : { organizationName })
-        // };
-
-        // try {
-        //     const response = await axios.post('http://localhost:5008/api/auth/signup', payload, {
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //     });
-        //     console.log('Registration successful:', response.data);
-        //     navigate('/login'); 
-        // } catch (err) {
-        //     console.error('Error registering:', err);
-        //     setError('Registration failed');
-        // }
-        navigate('/login')
+        const payload = {
+            username,
+            password,
+            gender,
+            fullName: name,
+            profilePic: profilePic || defaultProfilePic, // Default or provided URL
+        };
+    
+        // Determine the correct URL based on the role
+        const url = role === 'admin' 
+            ? 'http://127.0.0.1:5008/api/admin/register-admin'
+            : 'http://127.0.0.1:5008/api/auth/signup';
+    
+        try {
+            // Make the POST request to the backend
+            const response = await axios.post(url, payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                withCredentials: true
+            });
+    
+            // Handle success response
+            if (response.data.message) {
+                alert(response.data.message);
+                navigate('/login');
+            } else if (response.data.error) {
+                setError(response.data.error);
+            }
+        } catch (err) {
+            // Handle error response
+            const errorMessage = err.response?.data?.error || 'Registration failed. Please try again.';
+            setError(errorMessage);
+        }
     };
-
+    
     return (
         <div className="bg-footprints flex justify-center items-center min-h-screen">
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg backdrop-blur-md bg-opacity-60">
                 <h2 className="text-center text-2xl mb-4 font-bold text-gray-800">Register</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Role Dropdown */}
-                    <div>
+                    {/* <div>
                         <label className="block text-sm font-medium mb-1 text-gray-600" htmlFor="role">
                             Role
                         </label>
@@ -87,7 +101,7 @@ const Register = () => {
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     {/* Conditional Fields */}
                     {role === 'user' && (
