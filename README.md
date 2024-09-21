@@ -5,35 +5,36 @@ by matching pets with potential adopters using a machine-learning model. Users c
 We can design a web application with both staff and admin interfaces to create an interface for pet adoption platform with the mentioned features. 
 ## Features
 
-- Adoption Likelihood Prediction Model:
-Utilizes a Random Forest machine learning model to predict the likelihood of a pet being adopted based on features like weight, breed, health, etc.
+- **Adoption Likelihood Prediction Model:**
+  Utilizes a Random Forest machine learning model to predict the likelihood of a pet being adopted based on features like weight, breed, health, etc.
 
-- Separate Access for Admin and Normal Users:
-Distinct access levels for administrative functions and regular user activities.
+- **Separate Access for Admin and Normal Users:**
+  Distinct access levels for administrative functions and regular user activities.
 
-- Reports and Analytics:
-Generates visualizations (charts) to analyze the relationship between various features and adoption likelihood for admin access.
-Offers insights into trends, management, and potential issues within the adoption process.
+- **Reports and Analytics:**
+  - Generates visualizations (charts) to analyze the relationship between various features and adoption likelihood for admin access.
+  - Offers insights into trends, management, and potential issues within the adoption process.
 
-- Pet Management:
-Admins can add, update, and delete pet listings.
+- **Pet Management:**
+  Admins can add, update, and delete pet listings.
 
-- Shelter Management:
-Admins can add and update shelter information.
+- **Shelter Management:**
+  Admins can add and update shelter information.
 
-- Adoption Process:
-Monitors the adoption process through a personality questionnaire to assess user compatibility.
-Schedules appointments with adoption centers based on user responses.
+- **Adoption Process:**
+  - Monitors the adoption process through a personality questionnaire to assess user compatibility.
+  - Schedules appointments with adoption centers based on user responses.
 
-- Events and Donations:
-Enables users to register for and participate in events and campaigns organized by shelters.
-Provides functionality for users to donate to shelters and adoption centers.
+- **Events and Donations:**
+  - Enables users to register for and participate in events and campaigns organized by shelters.
+  - Provides functionality for users to donate to shelters and adoption centers.
 
-- User-Friendly Interface:
-Allows users to browse pets and view details, including adoption likelihood.
+- **User-Friendly Interface:**
+  Allows users to browse pets and view details, including adoption likelihood.
 
-- Community Engagement Features:
-Supports community involvement through events and donation options.
+- **Community Engagement Features:**
+  Supports community involvement through events and donation options.
+
 
 
 ## Technologies used
