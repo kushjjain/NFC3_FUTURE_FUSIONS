@@ -29,7 +29,7 @@ Provides insights into trends, management, and identified issues.
 - Implement backend using Python with frameworks like Flask.
 - Frontend: ReactJS, ChartJS (UI not emphasized in this repository)
 
-By implementing these features, the hotel management can streamline operations, improve cleanliness standards, and enhance guest satisfaction.
+
 ## Installation
 
 1.Clone the repository:
