@@ -1,4 +1,4 @@
-https://youtu.be/Ds-zPh3PeIU
+[![Project Video](https://img.youtube.com/vi/Ds-zPh3PeIU/0.jpg)](https://youtu.be/Ds-zPh3PeIU)
 ## Pet Adoption Platform
 This repository contains the code for a comprehensive Pet Adoption Platform designed to streamline the adoption process
 by matching pets with potential adopters using a machine-learning model. Users can browse pets, view details and see adoption likelihood, while shelters can manage listings and connect with adopters. The platform also supports community engagement through events and donations.
